@@ -1,0 +1,63 @@
+* all transactions done at woolworths
+    - cat mytransactions.csv | grep -i woolworths | wc -l
+
+#awk can help further process lines
+#split by ", take the second column after split
+#split it further by , and take the first item
+#total is a variable which keeps on adding first value and when done, you print total
+
+    cat mytransactions.csv | grep -i woolworths | awk -F'",' '{print $2}' | awk -F',' '{total+=$1} END {print total}'
+
+total transaction in Drink:Groceries
+
+     cat mytransactions.csv | grep 'Drink:Groceries' | wc -l
+
+all transaction of date "2019-10-15"
+
+     cat mytransactions.csv | grep "2019-10-15"
+
+for x in $(echo 1 2 3 4);
+do
+    echo $x;
+done
+
+
+for x in {1..10};
+do
+  echo $x;
+done
+
+for x in $(cat build.gradle)
+do
+    echo $x;
+done;
+
+if [[ -z $HOMES ]];
+then
+    echo HOMES is not set
+fi
+
+if [[ ! -f "build.gradles" ]];
+then
+    echo file not found
+fi
+
+
+if [[ ! -d ".git" ]];
+then
+    echo This is not a git project
+else
+    echo This is a git project
+fi;
+
+
+-d -> checks directory
+-z -> variable set
+-f -> file exists
+
+
+TO_CHECK=".gradle";
+if [[ ! -d "${TO_CHECK}" ]] && [[ ! -f "${TO_CHECK}"]];
+then
+     echo "neither a file nor a directory"
+fi;

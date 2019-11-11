@@ -1,0 +1,17 @@
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+group 'TransactionEtl'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.opencsv:opencsv:5.0'
+}
