@@ -1,0 +1,51 @@
+
+apply plugin: "jacoco"
+ext{
+    jacocoDir = "$buildDir/jacoco"
+}
+jacoco {
+    toolVersion = "0.8.2"
+    reportsDir = file(jacocoDir)
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("$jacocoDir/html")
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.1
+            }
+        }
+
+        rule {
+            enabled = false
+            element = "CLASS"
+            includes = ["org.gradle.*"]
+
+            limit {
+                counter = "LINE"
+                value = "TOTALCOUNT"
+                maximum = 0.3
+            }
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+    reports.junitXml.destination = file("$buildDir/test-results")
+    jacoco {
+        append = false
+        destinationFile = file("$jacocoDir/jacocoTest.exec")
+        classDumpDir = file("$jacocoDir/classpathdumps")
+    }
+    systemProperty "spring.profile.active", "test"
+    systemProperty "junit.jupiter.extensions.autodetection.enabled", "true"
+}

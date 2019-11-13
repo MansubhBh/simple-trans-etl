@@ -61,3 +61,10 @@ if [[ ! -d "${TO_CHECK}" ]] && [[ ! -f "${TO_CHECK}"]];
 then
      echo "neither a file nor a directory"
 fi;
+
+
+for x in (docker ps | grep -v CONTAINER | awk '{print $1}')
+do
+    echo $x;
+done;
+
